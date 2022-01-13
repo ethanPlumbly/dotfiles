@@ -1,178 +1,92 @@
 #!/bin/zsh
-
-# -------------------------------------------------------------------
-# personal
-# -------------------------------------------------------------------
-
-alias cdg="cd ~/git"
-alias ve="source venv/bin/activate"
-alias spy="tail -f"
-alias zrc="cd ~/git/dotfiles/zsh"
-alias dot="cd ~/git/dotfiles"
-alias c19="ssh johnh@code19.cantabresearch.com"
-alias colo="ssh johnh@cam2c01.farm.speechmatics.io"
-alias aml="ssh johnh@bastion.aml.speechmatics.io"
-alias mkve="virtualenv -p python3"
-alias hn="hostname"
-
-# -------------------------------------------------------------------
-# general
-# -------------------------------------------------------------------
-
-alias zshrc="vim ~/.zshrc"
-alias ohmyzsh="vim ~/.oh-my-zsh"
-
-# file and directories
-alias rm='rm -i'
-alias rmd='rm -rf'
-alias cp='cp -i'
-alias mv='mv -i'
-alias mkdir='mkdir -p'
-
-# find/read files
-alias h='head'
-alias t='tail'
-alias rl="readlink -f"
-alias fd='find . -type d -name'
-alias ff='find . -type f -name'
-alias which='type -a'
-
-# storage
-alias du='du -kh' # file space
-alias df='df -kTh' # disk space
-alias usage='du -sh * 2>/dev/null | sort -rh'
-alias dus='du -sckx * | sort -nr'
-
-# processes
-alias psg='ps -ef | grep -i $1'
-alias scumbag="ps aux  --sort=-%cpu | grep -m 11 -v `whoami`"
-
-# extract
-alias tgz='tar -zxvf'
-alias tbz='tar -jxvf'
-
-# other
-alias rs='rsync -pravhz'
-alias hist='history | grep'
-alias path='echo -e ${PATH//:/\\n}'
-alias man="man -a"
-alias busy="cat /dev/urandom | hexdump -C | grep "ca fe""
-# alias j='jobs -l'
-# alias ltx='pdflatex'
-# alias x='xclip -sel clip'
-
-
-#-------------------------------------------------------------
-# cd
-#-------------------------------------------------------------
-
-alias c='cd'
-alias ..='cd ..'
-alias ...='cd ../../'
-alias ...='cd ../../../'
-alias ....='cd ../../../../'
-alias .....='cd ../../../../'
-alias .4='cd ../../../../'
-alias .5='cd ../../../../..'
-alias /='cd /'
-
-alias d='dirs -v'
-alias 1='cd -1'
-alias 2='cd -2'
-alias 3='cd -3'
-alias 4='cd -4'
-alias 5='cd -5'
-alias 6='cd -6'
-alias 7='cd -7'
-alias 8='cd -8'
-alias 9='cd -9'
-
-#-------------------------------------------------------------
-# git
-#-------------------------------------------------------------
-
+alias work="ssh -p 10022 ethanp@cantab-vm.linkpc.net"
+alias qq='qstat -q "aml*" -f -u \* | less'
+alias gq='qstat -q aml-gpu.q -f -u \* | less'
+alias gqf='qstat -q aml-gpu.q -u \* -r -F gpu | egrep -v "jobname|Master|Binding|Hard|Soft|Requested|Granted" | less'
+alias cq='qstat -q "aml-cpu.q" -f -u \* | less'
+export NPS_IP="82.8.135.62"
+export MOWBRAY_IP="86.26.38.2"
+alias sergeijl="ssh -N -L localhost:8888:localhost:8888 sam@$MOWBRAY_IP"
+alias sergei="ssh sam@$MOWBRAY_IP"
+alias v="nvim"
 alias g="git"
-alias gcl="git clone"
-alias ga="git add"
-alias gaa="git add ."
-alias gc="git commit -m"
-alias gp="git push"
-alias gpf="git push -f"
-alias gpo="git push origin $(current_branch)"
-alias gpp='git push --set-upstream origin $(current_branch)'
-
-alias gg='git gui'
-alias glog='git log --oneline --all --graph --decorate'
-
-alias gf="git fetch"
-alias gl="git pull"
-
-alias grb="git rebase"
-alias grbm="git rebase master"
-alias grbc="git rebase --continue"
-alias grbs="git rebase --skip"
-alias grba="git rebase --abort"
-
-alias gd="git diff"
-alias gs="git status"
-
-alias gco="git checkout"
-alias gcb="git checkout -b"
-alias gcm="git checkout master"
-
-alias grhead="git reset HEAD^"
-alias grhard="git fetch origin && git reset --hard"
-
-alias gst="git stash"
-alias gstp="git stash pop"
-alias gsta="git stash apply"
-alias gstd="git stash drop"
-alias gstc="git stash clear"
-
-#-------------------------------------------------------------
-# tmux
-#-------------------------------------------------------------
-
-alias ta="tmux attach"
-alias taa="tmux attach -t"
-alias tad="tmux attach -d -t"
-alias td="tmux detach"
-alias ts="tmux new-session -s"
-alias tl="tmux list-sessions"
-alias tkill="tmux kill-server"
-alias tdel="tmux kill-session -t"
-
-#-------------------------------------------------------------
-# ls
-#-------------------------------------------------------------
-
-alias l="ls -CF --color=auto"
-alias ll="ls -l --group-directories-first"
-alias la='ls -Al'         # show hidden files
-alias lx='ls -lXB'        # sort by extension
-alias lk='ls -lSr'        # sort by size, biggest last
-alias lc='ls -ltcr'       # sort by and show change time, most recent last
-alias lu='ls -ltur'       # sort by and show access time, most recent last
-alias lt='ls -ltr'        # sort by date, most recent last
-alias lsm='ls -al |more'  # pipe through 'more'
-alias lr='ls -lR'         # recursive ls
-alias tree='tree -Csu'    # nice alternative to 'recursive ls'
-
-#-------------------------------------------------------------
-# chmod
-#-------------------------------------------------------------
-
-chw () {
-  if [ "$#" -eq 1 ]; then
-    chmod a+w $1
-  else
-    echo "Usage: chw <dir>" >&2
-  fi
-}
-chx () {
-  if [ "$#" -eq 1 ]; then
-    chmod a+x $1
-  else
-    echo "Usage: chx <dir>" >&2
-  fi
-}
+alias rl="readlink -f"
+alias gpp='git push --set-upstream origin $(git_current_branch)'
+alias c='cd /home/ethanp/git/claddin'
+alias dot='cd $HOME/git/dotfiles'
+alias ke="cd /perish_ssdlocal/ethanp/exp"
+alias whogpu="ps -up \$(nvidia-smi -q -x | grep pid | sed -e 's/<pid>//g' -e 's/<\/pid>//g' -e 's/^[[:space:]]*//')"
+alias exp="cd /perish_aml03/exp/ethanp"
+alias asrs="cd /home/ethanp/git/hydra/heads/asr/scripts"
+alias kw="cd /perish_aml01/workspaces/pychain_workspace_headbench"
+alias ws="cd /perish_aml01/workspaces/pychain_workspace_stable"
+alias wss="source /perish_aml01/workspaces/pychain_workspace_stable/path_20210204_jit_fbanks.sh"
+alias asrse="cd /home/ethanp/git/hydra/heads/asr/scripts/exps"
+alias tb="singularity exec -B \$PWD oras://singularity-master.artifacts.speechmatics.io/tensorboard:2.6.0a20210704 tensorboard --load_fast true --host=$(hostname -f)  --reload_multifile true --logdir=\$PWD"
+alias b1="ssh ethanp@gpu001.grid.speechmatics.io"
+alias b2="ssh ethanp@gpu002.grid.speechmatics.io"
+alias b3="ssh ethanp@gpu003.grid.speechmatics.io"
+alias b4="ssh ethanp@gpu004.grid.speechmatics.io"
+alias b5="ssh ethanp@gpu005.grid.speechmatics.io"
+alias mb="cd /perish_aml01/exp/march_build"
+alias repb="cd /perish_aml03/exp/ethanp/rep_body"
+alias scs="cd /home/ethanp/git/hydra/heads/speaker_change/scripts"
+alias repsc="cd /perish_aml03/exp/ethanp/rep_sc"
+alias am="cd /home/ethanp/git/aladdin/aladdin/am/train"
+alias di="cd /home/ethanp/git/aladdin/aladdin/diarization/train"
+alias a="cd /home/ethanp/git/aladdin"
+alias ap="cd /home/ethanp/git/aladdin/aladdin"
+alias amt="cd /home/ethanp/git/aladdin/aladdin/am/test"
+alias sru="cd /home/ethanp/git/aladdin/aladdin/body/sru"
+alias smd="cd /home/ethanp/git/sm-diarization"
+alias dit="cd /home/ethanp/git/aladdin/aladdin/diarization/test"
+alias b="cd /home/ethanp/git/bladdin"
+alias vad="cd /home/ethanp/git/aladdin/aladdin/vad"
+alias dik="cd /home/ethanp/git/aladdin/aladdin/diarization/kaldi_pytorch_port"
+alias cw="cd /home/ethanp/git/aladdin/aladdin/body/cwvae/train"
+alias vd="cd /home/ethanp/git/aladdin/aladdin/body/vdvae/train"
+alias vde="cd /perish_aml03/exp/ethanp/vdvae_init"
+alias lm="cd /home/ethanp/git/aladdin/aladdin/lm/train"
+alias replm="cd /perish_aml03/exp/ethanp/rep_LM"
+alias lmt="cd /home/ethanp/git/aladdin/aladdin/lm/test"
+alias testsets="cd /home/ethanp/git/aladdin/testsets"
+alias repam="cd /perish_aml03/exp/ethanp/rep_AM"
+alias sc="cd /home/ethanp/git/aladdin/aladdin/speaker_change/train"
+alias np="cd /home/ethanp/git/aladdin/aladdin/neural_punctuation/train"
+alias repnp="cd /perish_aml03/exp/ethanp/rep_punc"
+alias at="cd /home/ethanp/git/aladdin/testsets/am/en/adobe"
+alias ms="make shell"
+alias johnhlm="cd /perish_aml03/exp/johnh/rep_LM"
+alias npt="cd /home/ethanp/git/aladdin/aladdin/neural_punctuation/test"
+alias langpack="cd /home/ethanp/git/aladdin/aladdin/langpack"
+alias lmd="cd /home/ethanp/git/aladdin/aladdin/lm/data_prep"
+alias amd="cd /home/ethanp/git/aladdin/aladdin/am/data_prep"
+alias npd="cd /home/ethanp/git/aladdin/aladdin/neural_punctuation/data_prep"
+alias ene="cd /perish_aml03/exp/ethanp/am/en"
+alias vqcwe="cd /perish_aml03/exp/ethanp/vqcwvae_round_1"
+alias lme="cd /perish_aml03/exp/ethanp/lm"
+alias cw2="cd /home/ethanp/git/aladdin2/aladdin/body/cwvae/train"
+alias a2="cd /home/ethanp/git/aladdin2"
+alias p3="cd /perish_aml03"
+alias ap2="cd /home/ethanp/git/aladdin2/aladdin"
+alias lm2="cd /home/ethanp/git/aladdin2/aladdin/lm/train"
+alias lmt2="cd /home/ethanp/git/aladdin2/aladdin/lm/test"
+alias p5="cd /perish_aml05"
+alias am2="cd /home/ethanp/git/aladdin2/aladdin/am/train"
+alias home="cd /home/ethanp"
+alias p2="cd /perish_aml02"
+alias p4="cd /perish_aml04"
+alias npe="cd /perish_aml03/exp/ethanp/neural_punc"
+alias exp5="cd /perish_aml05/ethanp/exps"
+alias b2="cd /home/ethanp/git/aladdin2/aladdin/body/train"
+alias be="cd /perish_aml02/exp/hydra_bodies/ethanp/next_gen_greedy.sh"
+alias ad="cd /home/ethanp/git/aladdin/aladdin/dataloader"
+alias hbe="cd /perish_aml02/exp/hydra_bodies/ethanp"
+alias ad2="cd /home/ethanp/git/aladdin2/aladdin/dataloader"
+alias itn="cd /home/ethanp/git/aladdin/aladdin/itn"
+alias p1="cd /perish_aml01"
+alias bd="cd /home/ethanp/git/aladdin/aladdin/body/data_prep"
+alias cwe="cd /perish_aml05/ethanp/exps/cwvae_scaling"
+alias did="cd /perish_aml05/data/diarization/VoxCeleb_combined"
+alias die="cd /exp/ethanp/diarization"
+alias neu="cd /exp/ethanp/txl_neural_clustering"

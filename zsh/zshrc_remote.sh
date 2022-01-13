@@ -15,6 +15,7 @@ autoload -U compinit && compinit
 source $ZSH/oh-my-zsh.sh
 source ~/git/dotfiles/zsh/remote.sh
 source ~/git/dotfiles/zsh/aliases.sh
+source ~/git/dotfiles/zsh/custom_funcs.sh
 source ~/git/dotfiles/zsh/extras.sh
 source ~/git/dotfiles/zsh/p10k.zsh
 
